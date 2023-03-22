@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:thought_box_machine_test/utils/app_colors.dart';
 import 'package:thought_box_machine_test/utils/app_images.dart';
@@ -16,7 +15,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
     Timer(
       const Duration(seconds: 3),
       () => Navigator.pushReplacement(

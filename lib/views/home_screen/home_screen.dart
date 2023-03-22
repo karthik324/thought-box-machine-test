@@ -31,10 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void addAllChars() {
     String alphabets = "abcdefghijklmnopqrstuvwxyz";
     List<String> arr = alphabets.split('');
-
-    for (var element in arr) {
-      set.add(element);
-    }
+    set.addAll(arr);
   }
 
   @override
@@ -176,13 +173,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             height10,
-            const Padding(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'Rows can vary since it\'ll completely depend on the inputs',
-                style: AppStyles.normalText,
-              ),
-            ),
             isAssigned
                 ? Container(
                     margin: const EdgeInsets.all(10),
@@ -190,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: chars.length,
+                      itemCount: rows * cols,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: cols,
                         crossAxisSpacing: 4,
@@ -198,18 +188,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         childAspectRatio: 1,
                       ),
                       itemBuilder: (context, index) {
-                        return Container(
-                          alignment: Alignment.center,
-                          color: searchList.contains(chars[index])
-                              ? AppColors.redColor
-                              : AppColors.primaryColor,
-                          child: Text(
-                            chars[index],
-                            style: AppStyles.normalText.copyWith(
-                              color: AppColors.whiteColor,
-                            ),
-                          ),
-                        );
+                        return index < chars.length
+                            ? Container(
+                                alignment: Alignment.center,
+                                color: searchList.contains(chars[index])
+                                    ? AppColors.redColor
+                                    : AppColors.primaryColor,
+                                child: Text(
+                                  chars[index],
+                                  style: AppStyles.normalText.copyWith(
+                                    color: AppColors.whiteColor,
+                                  ),
+                                ),
+                              )
+                            : Container(
+                                color: AppColors.primaryColor,
+                              );
                       },
                     ),
                   )
